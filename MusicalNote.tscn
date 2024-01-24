@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://bcxs3snclvpnl"]
+
+[ext_resource type="Script" path="res://MusicalNote.gd" id="1_jqiey"]
+
+[sub_resource type="Gradient" id="Gradient_ew4cc"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.0379346, 0.791916, 0.0135382, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r32nq"]
+gradient = SubResource("Gradient_ew4cc")
+width = 6
+height = 6
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h8tk2"]
+size = Vector2(2, 2)
+
+[node name="MusicalNote" type="CharacterBody2D" groups=["Note"]]
+script = ExtResource("1_jqiey")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_r32nq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_h8tk2")

@@ -1,0 +1,56 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5k6ajr6rkoq0"]
+
+[ext_resource type="Script" path="res://Panel.gd" id="1_gtm32"]
+[ext_resource type="PackedScene" uid="uid://bcxs3snclvpnl" path="res://MusicalNote.tscn" id="2_tcmt1"]
+[ext_resource type="AudioStream" uid="uid://c7xmas8ku6sly" path="res://sound.mp3" id="3_pcvob"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_riimi"]
+size = Vector2(5, 40)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Button" type="Button" parent="."]
+offset_left = 524.0
+offset_top = 481.0
+offset_right = 657.0
+offset_bottom = 556.0
+theme_override_colors/font_color = Color(0.776471, 0.372549, 0, 1)
+theme_override_font_sizes/font_size = 48
+text = "Press"
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(600, 40)
+offset_left = 266.0
+offset_top = 411.0
+offset_right = 866.0
+offset_bottom = 451.0
+script = ExtResource("1_gtm32")
+
+[node name="Area2D" type="Area2D" parent="Panel"]
+position = Vector2(295, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel/Area2D"]
+shape = SubResource("RectangleShape2D_riimi")
+
+[node name="AreaOut" type="Area2D" parent="Panel"]
+position = Vector2(3, 20)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Panel/AreaOut"]
+shape = SubResource("RectangleShape2D_riimi")
+
+[node name="MusicalNote" parent="Panel" instance=ExtResource("2_tcmt1")]
+position = Vector2(600, 20)
+
+[node name="Spawner" type="Node2D" parent="Panel"]
+position = Vector2(600, 20)
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_pcvob")
+
+[connection signal="body_entered" from="Panel/Area2D" to="Panel" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Panel/AreaOut" to="Panel" method="_on_area_out_body_entered"]
